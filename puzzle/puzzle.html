@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Puzzle</title>
+
+    <style>
+        #main {
+            background-color: #ECC7B5;
+
+            margin: 10px;
+            padding: 10px;
+
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+
+            width: 500px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+
+
+        }
+
+        #title {
+            font-size: 30px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font: bold;
+            color: #F5E073;
+            background-color: #80614F;
+
+            margin: 10px;
+            padding: 10px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 500px;
+
+        }
+
+        #button_name {
+            font-size: 30px;
+            margin: 10px;
+            padding: 10px;
+            justify-content: center;
+            align-items: center;
+            width: 520px;
+            background-color: ;
+            color: #F5E073;
+            background-color: #80614F;
+
+
+
+        }
+
+
+        #cat_image {
+            margin: 20px;
+            margin-left: 50px;
+            margin-top: 30px;
+            padding: 10px;
+            line-height: 0%;
+
+
+        }
+    </style>
+
+    <script>
+
+        let image_array = new Array();
+        let temp = 1;
+        let imgsource1 = new Array("1.gif", "2.gif", "3.gif", "4.gif", "5.gif", "6.gif", "7.gif",
+            "8.gif", "9.gif", "10.gif", "11.gif", "12.gif", "13.gif", "14.gif", "15.gif", "blink.gif");
+        let blink = 0;
+
+
+        const start = () => {
+            for (a = 0; a < 16; a++) {
+                image_array[a] = Math.round(Math.random() * 15);
+                for (b = 0; b < a; b++) {
+                    if (image_array[a] == image_array[b]) { a--; }
+                }// for b end 
+            } //for a end
+
+            mix();
+        }//start end
+
+
+        const mix = () => {
+            for (i = 0; i < 16; i++) {
+                document.images[i].src = imgsource1[image_array[i]];
+                if (image_array[i] == 15) blink = i;
+            }
+        }// mix end
+
+
+        const move = (k) => {
+            var gap = Math.abs(blink - k)
+            if (gap == 1 || gap == 4) {
+                temp1 = image_array[k];
+                image_array[k] = image_array[blink];
+                image_array[blink] = temp1;
+                mix();
+            }
+        }// move end
+
+
+    </script>
+
+
+</head>
+
+<body>
+
+
+    <div id="main" name="main">
+
+
+        <div id="move_image" name="move_image">
+
+            <div id="title" name="title">
+                CAT PUZZLE
+            </div>
+
+            <div id="cat_image" name="cat_image">
+
+                <script type="text/javascript">
+                    imgsource = new Array("1.gif", "2.gif", "3.gif", "4.gif", "5.gif", "6.gif", "7.gif", "8.gif",
+                        "9.gif", "10.gif", "11.gif", "12.gif", "13.gif", "14.gif", "15.gif", "16.gif");
+
+                    for (i = 0; i < 16; i++) {
+                        document.write("<img src=" + imgsource[i] + " border = 1 onClick = 'move(" + i + ")'>");
+                        if (((i + 1) % 4) == 0) document.write("<br>");
+                    }
+                </script>
+
+            </div>
+
+            <div id="button_name_div" name="button_name_div">
+                <input type="button" onclick="start()" value=">>> Game Start <<<" id="button_name" name="button_name">
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+</body>
+
+</html>
